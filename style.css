@@ -1,106 +1,242 @@
-@media (max-width: 768px) {
-  /* ===============================
-     NAVBAR MOBILE
-  ================================ */
+/* ===============================
+   RESET DASAR
+================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-  .nav-links {
-    display: none;
-  }
-
-  .burger {
-    display: block;
-  }
-
-  /* ===============================
-     OVERLAY BACKGROUND
-  ================================ */
-
-  .menu-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    display: none;
-    justify-content: flex-end;
-    z-index: 999;
-  }
-
-  .menu-overlay.active {
-    display: flex;
-  }
-
-  /* ===============================
-     PANEL MENU (KANAN)
-  ================================ */
-
-  .menu-panel {
-    width: 75%;
-    height: 100%;
+/* ===============================
+   BODY & GLOBAL
+================================ */
+body {
+    font-family: "Poppins", Arial, sans-serif;
     background-color: #ffffff;
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    animation: slideIn 0.3s ease;
-  }
-
-  .menu-panel a {
-    text-decoration: none;
-    font-size: 18px;
     color: #333333;
-    font-weight: 500;
-  }
+    line-height: 1.8;
+}
 
-  /* Tombol close */
-  .close-menu {
-    align-self: flex-end;
-    font-size: 24px;
-    background: none;
-    border: none;
+/* ===============================
+   HEADER
+================================ */
+header {
+    background-color: #ffffff;
+    padding: 30px 60px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+/* Brand */
+.brand h1 {
+    font-size: 32px;
+    font-weight: 600;
+    color: #c2185b; /* warna makeup */
+}
+
+.brand p {
+    font-size: 14px;
+    color: #888888;
+    margin-top: 5px;
+}
+
+/* ===============================
+   NAVIGATION
+================================ */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* Menu */
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    font-size: 15px;
+    color: #333333;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #c2185b;
+}
+
+/* Button actions */
+.nav-actions button {
+    background-color: transparent;
+    border: 1px solid #dddddd;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 13px;
     cursor: pointer;
-  }
-
-  /* ===============================
-     ANIMASI
-  ================================ */
-
-  @keyframes slideIn {
-    from {
-      transform: translateX(100%);
-    }
-    to {
-      transform: translateX(0);
-    }
-  }
+    margin-left: 10px;
 }
 
-.menu-panel a {
-  position: relative;
-  padding-bottom: 6px;
+.nav-actions button:hover {
+    background-color: #f7f7f7;
 }
 
-/* menu aktif */
-.menu-panel a.active::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 24px;
-  height: 2px;
-  background-color: #c2185b;
+/* ===============================
+   MAIN
+================================ */
+main {
+    width: 1100px;
+    margin: auto;
 }
 
-.menu-panel a {
-  position: relative;
-  padding-bottom: 6px;
+/* ===============================
+   HERO SECTION
+================================ */
+#hero {
+    background-color: #faf6f8;
+    padding: 100px 40px;
+    text-align: center;
 }
 
-/* menu aktif */
-.menu-panel a.active::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 24px;
-  height: 2px;
-  background-color: #c2185b;
+#hero h2 {
+    font-size: 40px;
+    font-weight: 600;
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+#hero p {
+    font-size: 18px;
+    color: #666666;
+    max-width: 700px;
+    margin: auto;
+}
+
+/* ===============================
+   SECTION UMUM
+================================ */
+section {
+    padding: 80px 40px;
+}
+
+section h2 {
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 50px;
+    color: #333333;
+}
+
+/* ===============================
+   ABOUT
+================================ */
+#about article {
+    max-width: 800px;
+    margin: auto;
+    text-align: center;
+    font-size: 16px;
+    color: #555555;
+}
+
+/* ===============================
+   PRODUCTS
+================================ */
+#products {
+    background-color: #ffffff;
+}
+
+#products article {
+    background-color: #fafafa;
+    padding: 35px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+}
+
+#products h3 {
+    font-size: 20px;
+    color: #c2185b;
+    margin-bottom: 10px;
+}
+
+#products p {
+    color: #555555;
+}
+
+/* ===============================
+   PROJECTS / CAMPAIGN
+================================ */
+#projects {
+    background-color: #faf6f8;
+}
+
+#projects article {
+    max-width: 700px;
+    margin: auto;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    text-align: center;
+}
+
+#projects h3 {
+    color: #c2185b;
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+/* ===============================
+   CONTACT
+================================ */
+#contact {
+    background-color: #ffffff;
+}
+
+#contact address {
+    max-width: 500px;
+    margin: auto;
+    text-align: center;
+    font-style: normal;
+}
+
+#contact p {
+    font-size: 15px;
+    margin-bottom: 12px;
+    color: #555555;
+}
+
+/* ===============================
+   FOOTER
+================================ */
+footer {
+    background-color: #f5f5f5;
+    padding: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #777777;
+    border-top: 1px solid #eaeaea;
+}
+
+/* ===============================
+   BURGER MENU & OVERLAY (DESKTOP DEFAULT)
+================================ */
+
+/* Burger disembunyikan di desktop */
+.burger {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Overlay default (hidden) */
+.menu-overlay {
+  display: none;
+}
+
+.menu-panel a.active {
+  background-color: #faf6f8;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: #d96694ff;
 }

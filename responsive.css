@@ -1,0 +1,107 @@
+@media (max-width: 768px) {
+
+  /* ===============================
+     NAVBAR MOBILE
+  ================================ */
+
+  .nav-links {
+    display: none;
+  }
+
+  .burger {
+    display: block;
+  }
+
+  /* ===============================
+     OVERLAY BACKGROUND
+  ================================ */
+
+  .menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: flex-end;
+    z-index: 999;
+  }
+
+  .menu-overlay.active {
+    display: flex;
+  }
+
+  /* ===============================
+     PANEL MENU (KANAN)
+  ================================ */
+
+  .menu-panel {
+    width: 75%;
+    height: 100%;
+    background-color: #ffffff;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    animation: slideIn 0.3s ease;
+  }
+
+  .menu-panel a {
+    text-decoration: none;
+    font-size: 18px;
+    color: #333333;
+    font-weight: 500;
+  }
+
+  /* Tombol close */
+  .close-menu {
+    align-self: flex-end;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* ===============================
+     ANIMASI
+  ================================ */
+
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+}
+
+.menu-panel a {
+  position: relative;
+  padding-bottom: 6px;
+}
+
+/* menu aktif */
+.menu-panel a.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 24px;
+  height: 2px;
+  background-color: #c2185b;
+}
+
+.menu-panel a {
+  position: relative;
+  padding-bottom: 6px;
+}
+
+/* menu aktif */
+.menu-panel a.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 24px;
+  height: 2px;
+  background-color: #c2185b;
+}
