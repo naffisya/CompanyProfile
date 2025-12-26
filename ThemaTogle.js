@@ -1,48 +1,48 @@
 // ========================================
-// THEME TOGGLE SYSTEM - 5 THEMES
+// THEME TOGGLE SYSTEM & UI INTERACTION
 // ========================================
 
 // 1. DEFINISI TEMA
 const themes = {
   default: {
-    name: 'Default',
-    primary: '#3498db',
-    secondary: '#2c3e50',
-    background: '#ffffff',
-    text: '#333333',
-    accent: '#e74c3c'
+    name: 'Luméra Pink',
+    primary: '#c2185b',      // Pink Makeup
+    secondary: '#faf6f8',    // Background Hero/Section
+    background: '#ffffff',   // White
+    text: '#333333',         // Dark Grey
+    accent: '#555555'        // Secondary Text
   },
   dark: {
-    name: 'Dark',
-    primary: '#1a1a2e',
-    secondary: '#16213e',
-    background: '#0f0f23',
-    text: '#eaeaea',
-    accent: '#e94560'
+    name: 'Elegant Dark',
+    primary: '#ff4081',      // Bright Pink for contrast
+    secondary: '#1f1f1f',    // Dark Grey for sections
+    background: '#121212',   // Very Dark BG
+    text: '#eaeaea',         // Light Text
+    accent: '#b0b0b0'        // Grey Text
   },
   nature: {
     name: 'Nature',
-    primary: '#27ae60',
-    secondary: '#16a085',
-    background: '#f0f8f0',
-    text: '#2d3436',
-    accent: '#f39c12'
+    primary: '#27ae60',      // Green
+    secondary: '#f0f8f0',    // Light Green BG
+    background: '#ffffff',   // White
+    text: '#2d3436',         // Dark
+    accent: '#636e72'        // Grey
   },
   ocean: {
     name: 'Ocean',
-    primary: '#0984e3',
-    secondary: '#00b894',
-    background: '#dfe6e9',
-    text: '#2d3436',
-    accent: '#fd79a8'
+    primary: '#0984e3',      // Blue
+    secondary: '#eaf2f8',    // Light Blue BG
+    background: '#ffffff',   // White
+    text: '#2c3e50',         // Dark Blue
+    accent: '#7f8c8d'        // Grey Blue
   },
   sunset: {
     name: 'Sunset',
-    primary: '#fd79a8',
-    secondary: '#fdcb6e',
-    background: '#fff5e6',
-    text: '#2d3436',
-    accent: '#e17055'
+    primary: '#d35400',      // Orange
+    secondary: '#fdf2e9',    // Light Orange BG
+    background: '#fffaf0',   // Cream
+    text: '#2d3436',         // Dark
+    accent: '#8e44ad'        // Purple
   }
 };
 
@@ -54,11 +54,11 @@ function applyTheme(themeName) {
   const theme = themes[themeName];
   
   if (!theme) {
-    console.error('Theme tidak ditemukan!');
+    console.error(`Theme "${themeName}" not found!`);
     return;
   }
 
-  // Manipulasi CSS Variables di root
+  // Set CSS Variables
   const root = document.documentElement;
   root.style.setProperty('--primary-color', theme.primary);
   root.style.setProperty('--secondary-color', theme.secondary);
@@ -66,95 +66,118 @@ function applyTheme(themeName) {
   root.style.setProperty('--text-color', theme.text);
   root.style.setProperty('--accent-color', theme.accent);
 
-  // Update state
+  // Update State
   currentTheme = themeName;
-
-  // Simpan ke localStorage
+  
+  // Save to LocalStorage
   localStorage.setItem('selectedTheme', themeName);
-
-  // Update UI active state
-  updateActiveButton(themeName);
-
+  
+  // Update Button Text
+  updateThemeButton(theme.name);
+  
   // Log untuk debugging
-  console.log(`Theme changed to: ${theme.name}`);
+  console.log(`✅ Theme changed to: ${theme.name}`);
 }
 
-// 4. UPDATE ACTIVE BUTTON
-function updateActiveButton(themeName) {
-  // Hapus class active dari semua button
-  const buttons = document.querySelectorAll('.theme-btn');
-  buttons.forEach(btn => btn.classList.remove('active'));
-
-  // Tambah class active ke button yang dipilih
-  const activeButton = document.querySelector(`[data-theme="${themeName}"]`);
-  if (activeButton) {
-    activeButton.classList.add('active');
+// 4. UPDATE THEME BUTTON TEXT
+function updateThemeButton(themeName) {
+  const themeBtn = document.getElementById('theme-toggle');
+  if (themeBtn) {
+    themeBtn.textContent = `${themeName}`;
   }
 }
 
-// 5. EVENT LISTENERS
-function initThemeToggle() {
-  // Get semua theme buttons
-  const themeButtons = document.querySelectorAll('.theme-btn');
-
-  // Tambahkan event listener ke setiap button
-  themeButtons.forEach(button => {
-    button.addEventListener('click', function() {
-      const selectedTheme = this.getAttribute('data-theme');
-      applyTheme(selectedTheme);
-    });
-
-    // Hover effect (opsional)
-    button.addEventListener('mouseenter', function() {
-      const themeName = this.getAttribute('data-theme');
-      const theme = themes[themeName];
-      this.style.transform = 'scale(1.1)';
-      this.style.borderColor = theme.primary;
-    });
-
-    button.addEventListener('mouseleave', function() {
-      this.style.transform = 'scale(1)';
-    });
-  });
-
-  // Load saved theme dari localStorage
-  const savedTheme = localStorage.getItem('selectedTheme');
-  if (savedTheme && themes[savedTheme]) {
-    applyTheme(savedTheme);
-  } else {
-    applyTheme('default');
-  }
-}
-
-// 6. FUNGSI UNTUK CYCLE THEMES (BONUS)
+// 5. CYCLE THEME (Next Theme)
 function cycleTheme() {
   const themeNames = Object.keys(themes);
   const currentIndex = themeNames.indexOf(currentTheme);
   const nextIndex = (currentIndex + 1) % themeNames.length;
+  
   applyTheme(themeNames[nextIndex]);
 }
 
-// 7. KEYBOARD SHORTCUT (BONUS)
-function initKeyboardShortcut() {
-  document.addEventListener('keydown', function(event) {
-    // Tekan 'T' untuk cycle theme
-    if (event.key === 't' || event.key === 'T') {
+// 6. INITIALIZE THEME SYSTEM
+function initThemeSystem() {
+  console.log('Initializing Theme System...');
+  
+  // A. SETUP THEME BUTTON
+  const themeBtn = document.getElementById('theme-toggle');
+  if (themeBtn) {
+    themeBtn.addEventListener('click', () => {
       cycleTheme();
-    }
-  });
+    });
+    console.log('Theme button initialized');
+  } else {
+    console.warn('Theme button not found!');
+  }
+
+  // B. LOAD SAVED THEME
+  const savedTheme = localStorage.getItem('selectedTheme');
+  if (savedTheme && themes[savedTheme]) {
+    console.log(`Loading saved theme: ${savedTheme}`);
+    applyTheme(savedTheme);
+  } else {
+    console.log('Loading default theme');
+    applyTheme('default');
+  }
 }
 
-// 8. INITIALIZE SEMUA
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('Theme Toggle System initialized!');
-  initThemeToggle();
-  initKeyboardShortcut();
-});
+// 7. INITIALIZE BURGER MENU
+function initBurgerMenu() {
+  console.log('Initializing Burger Menu...');
+  
+  const burgerBtn = document.querySelector('.burger');
+  const closeBtn = document.querySelector('.close-menu');
+  const overlay = document.querySelector('.menu-overlay');
+  const menuLinks = document.querySelectorAll('.menu-panel a');
 
-// 9. EXPORT FUNCTIONS (untuk digunakan di tempat lain)
-window.themeSystem = {
-  applyTheme,
-  cycleTheme,
-  getCurrentTheme: () => currentTheme,
-  getThemes: () => themes
-};
+  if (!burgerBtn || !overlay) {
+    console.warn('Burger menu elements not found!');
+    return;
+  }
+
+  // Buka menu
+  burgerBtn.addEventListener('click', () => {
+    overlay.classList.add('active');
+    console.log('Menu opened');
+  });
+
+  // Tutup menu (tombol X)
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      overlay.classList.remove('active');
+      console.log('Menu closed (X button)');
+    });
+  }
+
+  // Tutup menu (klik background gelap)
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      overlay.classList.remove('active');
+      console.log('Menu closed (overlay click)');
+    }
+  });
+
+  // Tutup menu saat link diklik
+  menuLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      overlay.classList.remove('active');
+      console.log('Menu closed (link click)');
+    });
+  });
+
+  console.log('Burger menu initialized');
+}
+
+// 8. MAIN INITIALIZATION
+function initSystem() {
+  console.log('Starting Luméra Beauty System...');
+  
+  initThemeSystem();
+  initBurgerMenu();
+  
+  console.log('System initialized successfully!');
+}
+
+// 9. JALANKAN SAAT DOM SIAP
+document.addEventListener('DOMContentLoaded', initSystem);
